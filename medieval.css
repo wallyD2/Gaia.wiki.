@@ -1,0 +1,125 @@
+/* Estilo medieval mejorado para una experiencia WOW */
+
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arial&display=swap');
+
+body {
+    background: url('https://www.transparenttextures.com/patterns/old-wall.png');
+    background-color: #2a1d0a;
+    color: #e0d5b7;
+    font-family: 'Arial', sans-serif; /* Cambié la fuente a Arial */
+    margin: 0;
+    padding: 0;
+}
+
+.fixed-nav {
+    background: linear-gradient(to bottom, #3e2c15, #241709);
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom: 3px solid #b89b67;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    font-family: 'UnifrakturMaguntia', cursive; /* Fuente medieval para el menú */
+}
+
+.fixed-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.fixed-nav li {
+    display: inline;
+}
+
+.fixed-nav a {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 1.5em;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.fixed-nav a:hover {
+    color: #f8e473;
+    text-shadow: 0px 0px 10px rgba(255, 255, 180, 0.8);
+}
+
+.main-content {
+    padding: 120px 20px 50px;
+    max-width: 900px;
+    margin: auto;
+    background: rgba(34, 22, 10, 0.9);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    border: 3px solid #b89b67;
+    text-align: justify;
+    animation: fadeIn 1.5s ease;
+}
+
+.lore-title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #d4af37;
+    text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.7);
+    margin-bottom: 20px;
+    position: relative;
+    animation: glow 2s infinite alternate;
+    font-family: 'UnifrakturMaguntia', cursive; /* Fuente medieval para los subtítulos */
+}
+
+@keyframes glow {
+    0% { text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.4); }
+    100% { text-shadow: 0px 0px 20px rgba(212, 175, 55, 0.9); }
+}
+
+h2 {
+    font-size: 2em;
+    color: #b89b67;
+    text-shadow: 0px 0px 10px rgba(184, 155, 103, 0.6);
+    border-bottom: 2px solid #b89b67;
+    padding-bottom: 5px;
+    font-family: 'UnifrakturMaguntia', cursive; /* Fuente medieval para los subtítulos */
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #e0d5b7;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(36, 24, 14, 0.9);
+    border-top: var(--borde-dorado);
+    box-shadow: var(--sombra-dorada);
+    margin-top: 50px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.lore-title::before, .lore-title::after {
+    content: "✨"; /* Estrellas decorativas */
+    color: #d4af37;
+    font-size: 1.2em;
+    margin: 0 10px;
+    animation: flicker 1.5s infinite alternate;
+}

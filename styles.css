@@ -1,0 +1,185 @@
+/* Estilos Generales */
+body {
+    font-family: 'Orbitron', sans-serif; /* Fuente futurista */
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+    background-image: url('fondo.jpg'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Menú fijo futurista */
+.navigation {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    z-index: 1000;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.4);
+}
+
+.navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 40px;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: #00eaff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.navigation ul li a:hover {
+    color: #ff00ff;
+    transform: scale(1.1);
+}
+
+/* Imagen de encabezado */
+.header {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.header img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
+}
+
+/* Contenedor del contenido con efecto futurista */
+.container {
+    background: rgba(50, 50, 50, 0.9);
+    margin: 80px auto;
+    padding: 40px;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Efecto de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título con efecto de neón */
+.neon-title {
+    font-size: 2.8em;
+    font-weight: bold;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff, 0 0 30px #ff00ff;
+    animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Texto destacado */
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Efecto en palabras clave */
+.highlight {
+    color: #ff00ff;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px rgba(255, 0, 255, 0.7);
+}
+
+/* Texto con brillo */
+.shiny-text {
+    background: linear-gradient(45deg, #00eaff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    }
+}
+
+/* Redes sociales con animación */
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #00eaff;
+    font-size: 1.2rem;
+    margin: 0 15px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: #ff00ff;
+    transform: scale(1.2);
+}
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2f4f4f; /* Gris oscuro para el fondo */
+    color: #fff;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+/* Animación de color del texto */
+footer p {
+    font-size: 1rem;
+    animation: colorTextChange 5s infinite; /* Animación de cambio de color para el texto */
+}
+
+/* Animación de cambio de color del texto */
+@keyframes colorTextChange {
+    0% {
+        color: #fff; /* Blanco al inicio */
+    }
+    25% {
+        color: #4f7942; /* Verde musgo oscuro */
+    }
+    50% {
+        color: #d1b48c; /* Dorado suave */
+    }
+    75% {
+        color: #f4f0e6; /* Beige claro */
+    }
+    100% {
+        color: #fff; /* Blanco al final */
+    }
+}
+

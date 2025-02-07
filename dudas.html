@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dudas Generales - GAIA</title>
+    <link rel="stylesheet" href="dudas.css">
+</head>
+<body>
+    
+    <!-- Menú fijo -->
+    <nav class="fixed-nav">
+        <ul>
+            <li><a href="medieval.html">🌄 Historia</a></li>
+            <li><a href="aclaraciones.html">📜 Aclaraciones</a></li>
+            <li><a href="reglas.html">⚖️ Guia</a></li>
+            <li><a href="dudas.html">❓Dudas Generales</a></li>
+            <li><a href="chupamela_andres.html">🎭 Reglas</a></li>
+ 
+        </ul>
+    </nav>
+    
+    <header>
+        <h1>Dudas Generales</h1>
+    </header>
+    
+    <section class="faq">
+        <h2>Preguntas Frecuentes (FAQ)</h2>
+        <ul>
+            <li><strong>📜 ¿Existe la magia en GAIA?</strong><br>GAIA busca ser un servidor medieval realista con toques de fantasía...</li>
+            <li><strong>⚔️ ¿Puedo ser un mago o hechicero?</strong><br>No hay clases de magos o hechiceros en GAIA...</li>
+            <li><strong>🏰 ¿Cómo funciona la justicia en GAIA?</strong><br>Depende de la facción a la que pertenezcas...</li>
+            <li><strong>⚖️ ¿Cómo se ejecutan las condenas y penas de muerte (CK)?</strong><br>Un CK solo puede realizarse con justificación...</li>
+            <li><strong>🏹 ¿Puedo atacar a otros jugadores libremente?</strong><br>No. Para iniciar un combate es necesario...</li>
+            <li><strong>🛡️ ¿Puedo jugar sin unirme a la corona o la iglesia?</strong><br>Sí. Puedes ser un civil, mercenario...</li>
+            <li><strong>🏗️ ¿Puedo construir libremente en el mapa?</strong><br>Puedes construir en las áreas permitidas...</li>
+            <li><strong>🔞 ¿Qué significa que GAIA sea un servidor +18?</strong><br>GAIA permite roles maduros y temas sensibles...</li>
+            <li><strong>🛠️ ¿Qué pasa si uso hacks o exploto bugs?</strong><br>El uso de hacks, chetos o abuso de bugs está prohibido...</li>
+            <li><strong>📢 ¿Dónde puedo reportar problemas o sugerencias?</strong><br>Puedes usar el comando /helpop [mensaje]...</li>
+            <li><strong>⛪ ¿Cómo me uno a la iglesia u otra facción?</strong><br>Para unirte a la iglesia (templarios) debes pasar una entrevista...</li>
+        </ul>
+   
+</section>
+    
+ <section class="comentarios">
+        <h2>Comentarios</h2>
+        <div id="comentarios-lista"></div>
+        <textarea id="comentario" placeholder="Escribe tu comentario..."></textarea>
+        <button onclick="agregarComentario()">Comentar</button>
+    </section>
+    
+    <script>
+        const webhookURL = "https://discord.com/api/webhooks/1331881832597295134/Fpnyj_UMskYpbVodDcPRrEEXVUmOMvOoIZQ8FEqwGbGJ1nSq-6ZTJk7ZSd-vx7A8aLJd";
+
+        function cargarComentarios() {
+            let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
+            let likesDados = JSON.parse(localStorage.getItem("likesDados")) || {};
+            let lista = document.getElementById("comentarios-lista");
+            lista.innerHTML = "";
+
+            comentarios.forEach((comentario, index) => {
+                let comentarioDiv = document.createElement("div");
+                comentarioDiv.classList.add("comentario");
+                comentarioDiv.innerHTML = `
+                    <p onclick="toggleRespuestas(${index})">${comentario.texto} <span>💬</span></p>
+                    <button onclick="darLike(${index})" ${likesDados[index] ? 'disabled' : ''}>❤️ ${comentario.likes}</button>
+                    <button onclick="responder(${index})">Responder</button>
+                    <div class="respuestas oculto" id="respuestas-${index}"></div>
+                `;
+                lista.appendChild(comentarioDiv);
+
+                comentario.respuestas.forEach(respuesta => {
+                    let respuestaDiv = document.createElement("div");
+                    respuestaDiv.classList.add("respuesta");
+                    respuestaDiv.innerHTML = `<p>${respuesta}</p>`;
+                    document.getElementById(`respuestas-${index}`).appendChild(respuestaDiv);
+                });
+            });
+        }
+
+        function agregarComentario() {
+            let comentarioTexto = document.getElementById("comentario").value;
+            if (comentarioTexto.trim() !== "") {
+                let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
+                comentarios.push({ texto: comentarioTexto, respuestas: [], likes: 0 });
+                localStorage.setItem("comentarios", JSON.stringify(comentarios));
+                document.getElementById("comentario").value = "";
+                cargarComentarios();
+                enviarADiscord(comentarioTexto);
+            }
+        }
+
+        function responder(index) {
+            let respuestaTexto = prompt("Escribe tu respuesta:");
+            if (respuestaTexto) {
+                let comentarios = JSON.parse(localStorage.getItem("comentarios"));
+                comentarios[index].respuestas.push(respuestaTexto);
+                localStorage.setItem("comentarios", JSON.stringify(comentarios));
+                cargarComentarios();
+                enviarADiscord(`(Respuesta) ${respuestaTexto}`);
+            }
+        }
+
+        function darLike(index) {
+            let comentarios = JSON.parse(localStorage.getItem("comentarios"));
+            let likesDados = JSON.parse(localStorage.getItem("likesDados")) || {};
+
+            if (!likesDados[index]) {
+                comentarios[index].likes += 1;
+                likesDados[index] = true;
+                localStorage.setItem("comentarios", JSON.stringify(comentarios));
+                localStorage.setItem("likesDados", JSON.stringify(likesDados));
+                cargarComentarios();
+            }
+        }
+
+        function toggleRespuestas(index) {
+            let respuestasDiv = document.getElementById(`respuestas-${index}`);
+            respuestasDiv.classList.toggle("oculto");
+        }
+
+        function enviarADiscord(mensaje) {
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: mensaje })
+            }).catch(error => console.error("Error al enviar a Discord:", error));
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarComentarios);
+    </script>
+
+    <style>
+        .comentario {
+            background: rgba(34, 22, 10, 0.9);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 2px solid #b89b67;
+        }
+
+        .comentario p {
+            cursor: pointer;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .comentario button {
+            margin: 5px;
+            background: #b89b67;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .comentario button:hover {
+            background: #f8e473;
+        }
+
+        .comentario button:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+
+        .respuestas {
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 2px solid #b89b67;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        .respuesta {
+            background: rgba(50, 35, 20, 0.9);
+            padding: 5px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+    </style>
+</body>
+</html>

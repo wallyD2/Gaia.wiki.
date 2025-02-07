@@ -1,0 +1,127 @@
+/* Estilos mejorados para un diseño medieval aún más impresionante */
+
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arial&display=swap');
+
+:root {
+    --color-oro: #c9a227;
+    --color-fondo: #1e1b18;
+    --color-texto: #f5e6c8;
+    --color-resaltado: #8b5e3b;
+    --borde-dorado: 3px solid var(--color-oro);
+    --sombra-dorada: 0 0 10px rgba(201, 162, 39, 0.8);
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Cambié la fuente a Arial para el cuerpo */
+    background: url('https://www.transparenttextures.com/patterns/old-wall.png'); /* Fondo de textura medieval */
+    background-color: var(--color-fondo); /* Fondo de color */
+    color: var(--color-texto); /* Color de texto */
+    margin: 0;
+    padding: 0;
+}
+
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #3a2a15, transparent);
+    border-bottom: var(--borde-dorado);
+    z-index: 1000;
+    padding: 15px 0;
+    font-family: 'UnifrakturMaguntia', cursive; /* Fuente medieval para el menú */
+}
+
+.fixed-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 0;
+}
+
+.fixed-nav li {
+    display: inline;
+}
+
+.fixed-nav a {
+    text-decoration: none;
+    color: var(--color-oro);
+    font-size: 1.5rem;
+    text-shadow: var(--sombra-dorada);
+    transition: all 0.3s ease-in-out;
+    font-family: 'UnifrakturMaguntia', cursive; /* Fuente medieval para los enlaces */
+}
+
+.fixed-nav a:hover {
+    color: white;
+    text-shadow: 0 0 15px white;
+    transform: scale(1.1);
+}
+
+.main-content {
+    max-width: 800px;
+    margin: 100px auto 50px auto;
+    padding: 20px;
+    background: rgba(36, 24, 14, 0.9);
+    border: var(--borde-dorado);
+    border-radius: 15px;
+    box-shadow: var(--sombra-dorada);
+}
+
+h1, h2 {
+    text-align: center;
+    color: var(--color-oro);
+    text-shadow: var(--sombra-dorada);
+    font-family: 'UnifrakturMaguntia', cursive; /* Fuente medieval para los títulos */
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+strong {
+    color: var(--color-resaltado);
+    text-shadow: var(--sombra-dorada);
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: white;
+    background: var(--color-resaltado);
+    border: var(--borde-dorado);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-shadow: var(--sombra-dorada);
+}
+
+button:hover {
+    background: var(--color-oro);
+    color: #1e1b18;
+    box-shadow: var(--sombra-dorada);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(36, 24, 14, 0.9);
+    border-top: var(--borde-dorado);
+    box-shadow: var(--sombra-dorada);
+    margin-top: 50px;
+}

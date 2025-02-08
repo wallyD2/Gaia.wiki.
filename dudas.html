@@ -80,6 +80,13 @@
 
         function agregarComentario() {
             let comentarioTexto = document.getElementById("comentario").value;
+
+            // Bloquear el uso de '@'
+            if (comentarioTexto.includes("@")) {
+                alert("No puedes usar '@' en los comentarios.");
+                return;
+            }
+
             if (comentarioTexto.trim() !== "") {
                 let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
                 comentarios.push({ texto: comentarioTexto, respuestas: [], likes: 0 });
@@ -92,6 +99,13 @@
 
         function responder(index) {
             let respuestaTexto = prompt("Escribe tu respuesta:");
+
+            // Bloquear el uso de '@' en respuestas
+            if (respuestaTexto && respuestaTexto.includes("@")) {
+                alert("No puedes usar '@' en las respuestas.");
+                return;
+            }
+
             if (respuestaTexto) {
                 let comentarios = JSON.parse(localStorage.getItem("comentarios"));
                 comentarios[index].respuestas.push(respuestaTexto);
